@@ -1,4 +1,6 @@
-var EventUtil={
+;function(){
+	window.EventUtil=EventUtil;
+	var EventUtil={
 	//添加事件
 	addHandler:function(element,type,handler){
 		if(element.addEventListener){//检测是否为DOM2级方法
@@ -118,3 +120,4 @@ getButton: function(event){
 		}
 	}
 }
+}();
