@@ -117,3 +117,26 @@ for (var n = 1; n < args.length; n++) {
 }
 return temp;
 }
+//快速排序
+function quickSort(arr,left,right){
+	if(left<right){
+		var key=arr[left];
+		var low=left;
+		var high=right;
+
+		while(low<high){
+			while(low<high&&arr[high]>key){
+				high--;
+			}
+			arr[low]=arr[high];
+			while(low<high&&arr[low]<key){
+				low++;
+			}
+			arr[high]=arr[low];
+		}
+		arr[low]=key;
+		quickSort(arr,left,low-1);
+		quickSort(arr,low+1,right);
+	}
+
+}
