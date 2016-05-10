@@ -135,8 +135,7 @@ function quickSort(arr,left,right){
 			arr[high]=arr[low];
 		}
 		arr[low]=key;
-		quickSort(arr,left,low-1);
-		quickSort(arr,low+1,right);
+		arguments.callee(arr,left,low-1);
+		arguments.callee(arr,low+1,right);
 	}
-
 }
