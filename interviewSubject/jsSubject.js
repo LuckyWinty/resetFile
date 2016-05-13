@@ -139,3 +139,4 @@ function quickSort(arr,left,right){
 		arguments.callee(arr,low+1,right);
 	}
 }
+//树的遍历

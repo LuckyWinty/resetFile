@@ -5,12 +5,25 @@
 	<title>Document</title>
 </head>
 <body>
+<div id="test1">
+	<div class="test"><a href="#" >1</a></div>
+	<div class="test"><a href="#" >2</a></div>
+	<div class="test"><a href="#" >3</a></div>
+	<div class="test">1</div>
+	<div class="test"><a href="#" >5</a></div>
+</div>
 	<script type="text/javascript" src="jsSubject.js"></script>
 	<script>
 	var arr=[2,3,5,0,1,6,8,7];
 		console.log(arr);
 		quickSort(arr,0,arr.length-1);
 		console.log(arr);
+		var main=document.getElementById('test1');
+		var mains=document.querySelectorAll('.test');
+		mains=Array.prototype.slice.call(mains);
+	var t=mains.slice(2,1);
+
+		main.removeChild(t);
 	</script>
 </body>
 </html>
