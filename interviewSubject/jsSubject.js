@@ -140,3 +140,47 @@ function quickSort(arr,left,right){
 	}
 }
 //树的遍历
+/*递归*/
+//先序
+function preTraversal(node){
+	if(node){
+		console.log(node.value);
+		arguments.callee(node.left);
+		arguments.callee(node.right);
+	}
+}
+//中序
+function orderTraversal(node){
+	if(node){
+		arguments.callee(node.left);
+		console.log(node.value);
+		arguments.callee(node.right);
+	}
+}
+//后序
+function postTraversal(node){
+	if(node){
+		arguments.callee(node.left);
+		arguments.callee(node.right);
+		console.log(node.value);
+	}
+}
+/*非递归*/
+function preTraversalN(node){
+	var stack=[];
+	if(node){
+		stack.push(node);
+		while(stack.length!=0){
+			node=stack.pop();
+			console.log(node.value);
+			if(node.right){
+				stack.push(node.right);
+			}
+			if(node.left){
+				stack.push(node.left);
+			}
+		}
+	}else{
+		console.log("Empty Tree!")
+	}
+}
