@@ -184,3 +184,33 @@ function preTraversalN(node){
 		console.log("Empty Tree!")
 	}
 }
+function orderTraversalN(node){
+	var stack=[];
+	while(stack.length!=0||node){
+		if(node){
+			stack.push(node);
+			node=node.left;
+		}else{
+			node=stack.pop();
+			console.log(node.value);
+			node=node.right;
+		}
+	}
+}
+function postTraversalN(node){
+	var stack=[];
+	if(node){
+		stack.push(node);
+		while(stack.length!=0){
+			var tmp=stack[stack.length-1];
+			if(tmp.left&&node!=tmp.left&&node!=tmp.right){
+				stack.push(tmp.left);
+			}else if(tmp.right&&node!=tmp.right){
+				stack.push(tmp.right);
+			}else{
+				console.log(stack.pop().value);
+				node=tmp;
+			}
+		}
+	}
+}
