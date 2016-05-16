@@ -214,3 +214,13 @@ function postTraversalN(node){
 		}
 	}
 }
+//判断重复字符串个数
+function countChar(str) {
+	var count={};
+	str.split('')
+	.reduce(function(pre,cur){
+		pre[cur] ? pre[cur]++:pre[cur]=1;
+		return pre;
+	},count);
+	return count;
+}
