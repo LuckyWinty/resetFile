@@ -224,3 +224,15 @@ function countChar(str) {
 	},count);
 	return count;
 }
+//去除数组重复字符
+function unique(arr){
+	var unique={};
+	var uniqueArr=new Array();
+	arr.forEach(function(item,index,array){
+		if(!unique[item]){
+			unique[item]=item;
+			uniqueArr.push(item);
+		}
+	})
+	return uniqueArr;
+}
