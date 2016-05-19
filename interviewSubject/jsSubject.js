@@ -245,3 +245,23 @@ function color(){
 	}
 	return color;
 }
+//①生成一个数组，数组的值为从0到100
+function newArr(){
+	var arr=new Array(100);
+	return arr.fill('temp').map(function(item,index,array){
+		return index;
+	})
+}
+//随机打乱一个数组的顺序
+function randomArr(arr){
+	var temp='';
+	var index='';
+	for(var i=0;i<arr.length;i++){
+		temp=arr[i];
+		do{
+			index=Math.round(Math.random()*arr.length);
+		}while(index>=arr.length)
+		arr[i]=arr[index];
+		arr[index]=temp;
+	}
+}
