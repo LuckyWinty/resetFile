@@ -236,3 +236,12 @@ function unique(arr){
 	})
 	return uniqueArr;
 }
+//十六进制随机颜色生成
+function color(){
+	var value=["1","2","3","4","5","6","7","8","9","0","a","b","c","d","e","f"];
+	var color='#';
+	for(var i=0;i<6;i++){
+		color+=value[Math.round(Math.random()*15)];
+	}
+	return color;
+}
