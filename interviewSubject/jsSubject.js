@@ -265,3 +265,21 @@ function randomArr(arr){
 		arr[index]=temp;
 	}
 }
+//二分查找
+function halfFind(value,arr){
+	var low=0;
+	var high=arr.length-1;
+
+	while(low<high){
+		var min=Math.round((high-low)/2);
+console.log(min)
+		if(value==arr[min]){
+			return true;
+		}else if(value>arr[min]){
+			low=min+1;
+		}else{
+			high=min-1;
+		}
+	}
+	return false;
+}
