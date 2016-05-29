@@ -139,6 +139,10 @@ function quickSort(arr,left,right){
 		arguments.callee(arr,low+1,right);
 	}
 }
+//希尔排序
+function shellSort(){
+	
+}
 //树的遍历
 /*递归*/
 //先序
@@ -272,7 +276,7 @@ function halfFind(value,arr){
 
 	while(low<high){
 		var min=Math.round((high-low)/2);
-console.log(min)
+		console.log(min)
 		if(value==arr[min]){
 			return true;
 		}else if(value>arr[min]){
