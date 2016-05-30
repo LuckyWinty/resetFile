@@ -141,7 +141,18 @@ function quickSort(arr,left,right){
 }
 //希尔排序
 function shellSort(){
-	
+	vararr=[49,38,65,97,76,13,27,49,55,04],
+	len=arr.length;
+	for(varfraction=Math.floor(len/2);fraction>0;fraction=Math.floor(fraction/2)){
+		for(vari=fraction;i<len;i++){
+			for(varj=i-fraction;j>=0&&arr[j]>arr[fraction+j];j-=fraction){
+				vartemp=arr[j];
+				arr[j]=arr[fraction+j];
+				arr[fraction+j]=temp;
+			}
+		}
+	}
+	console.log(arr);
 }
 //树的遍历
 /*递归*/
