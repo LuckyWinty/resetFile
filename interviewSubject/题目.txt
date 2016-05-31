@@ -1,3 +1,22 @@
 //9.什么是FOUC？你如何来避免FOUC？
 /*由于css引入使用了@import 或者存在多个style标签以及css文件在页面底部引入使得css文件加载在html之后导致页面闪烁、花屏
 用link加载css文件，放在head标签里面*/
+
+CSS引入的方式有哪些? link和@import的区别是?
+内联 内嵌 外链 导入
+区别 ：同时加载
+前者无兼容性，后者CSS2.1以下浏览器不支持
+Link 支持使用javascript改变样式，后者不可
+
+写出几种IE6 BUG的解决方法
+1.双边距BUG float引起的 使用display
+2.3像素问题 使用float引起的 使用dislpay:inline -3px
+3.超链接hover 点击后失效 使用正确的书写顺序 link visited hover active
+4.Ie z-index问题 给父级添加position:relative
+5.Png 透明 使用js代码 改
+6.Min-height 最小高度 ！Important 解决’
+7.select 在ie6下遮盖 使用iframe嵌套
+8.为什么没有办法定义1px左右的宽度容器（IE6默认的行高造成的，使用over:hidden,zoom:0.08 line-height:1px）
+
+split() join() 的区别
+前者是切割成数组的形式，后者是将数组转换成字符串

@@ -287,7 +287,6 @@ function halfFind(value,arr){
 
 	while(low<high){
 		var min=Math.round((high-low)/2);
-		console.log(min)
 		if(value==arr[min]){
 			return true;
 		}else if(value>arr[min]){
@@ -298,3 +297,4 @@ function halfFind(value,arr){
 	}
 	return false;
 }
+//
