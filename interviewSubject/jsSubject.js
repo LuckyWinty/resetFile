@@ -297,4 +297,13 @@ function halfFind(value,arr){
 	}
 	return false;
 }
-//
+//编写一个方法 求一个字符串的字节长度
+//假设：一个英文字符占用一个字节，一个中文字符占用两个字节
+function GetBytes(str){
+         var len = str.length;
+         var bytes = len;
+      for(var i=0; i<len; i++){
+                    if (str.charCodeAt(i) > 255) bytes++;
+      }
+         return bytes;
+}
