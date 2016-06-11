@@ -300,10 +300,17 @@ function halfFind(value,arr){
 //编写一个方法 求一个字符串的字节长度
 //假设：一个英文字符占用一个字节，一个中文字符占用两个字节
 function GetBytes(str){
-         var len = str.length;
-         var bytes = len;
-      for(var i=0; i<len; i++){
-                    if (str.charCodeAt(i) > 255) bytes++;
-      }
-         return bytes;
+	var len = str.length;
+	var bytes = len;
+	for(var i=0; i<len; i++){
+		if (str.charCodeAt(i) > 255) bytes++;
+	}
+	return bytes;
+}
+//JavaScript中检测一个变量是一个String类型
+//String类型有两种生成方式：
+//(1)Var str = “hello world”;
+//(2)Var str2 = new String(“hello world”);
+function IsString(str){
+	return (typeof str == "string" || str.constructor == String);
 }
