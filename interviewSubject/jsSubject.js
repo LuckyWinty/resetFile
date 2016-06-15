@@ -321,23 +321,43 @@ n.type = "text/javascript";
 //以上省略部分代码
 //ie支持script的readystatechange属性
 if(ua.ie){
-   n.onreadystatechange = function(){
-       var rs = this.readyState;
-       if('loaded' === rs || 'complete'===rs){
-           n.onreadystatechange = null;
+	n.onreadystatechange = function(){
+		var rs = this.readyState;
+		if('loaded' === rs || 'complete'===rs){
+			n.onreadystatechange = null;
            f(id,url); //回调函数
        }
-};
+   };
 //省略部分代码
 //safari 3.x supports the load event for script nodes(DOM2)
-   n.addEventListener('load',function(){
-       f(id,url);
-   });
+n.addEventListener('load',function(){
+	f(id,url);
+});
 //firefox and opera support onload(but not dom2 in ff) handlers for
 //script nodes. opera, but no ff, support the onload event for link
 //nodes.
 }else{
-   n.onload = function(){
-       f(id,url);
-   };
+	n.onload = function(){
+		f(id,url);
+	};
 }
+//JavaScript中如何对一个对象进行深度clone
+function cloneObject(o) {
+	if(!o || 'object' !== typeof o) {
+		return o;
+	}
+	var c = 'function' === typeof o.pop ? [] : {};
+	var p, v;
+	for(p in o) {
+		if(o.hasOwnProperty(p)) {
+			v = o[p];
+			if(v && 'object' === typeof v) {
+				c[p] = Ext.ux.clone(v);
+			}
+			else {
+				c[p] = v;
+			}
+		}
+	}
+	return c;
+};
