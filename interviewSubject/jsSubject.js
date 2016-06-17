@@ -361,3 +361,28 @@ function cloneObject(o) {
 	}
 	return c;
 };
+ //请实现，鼠标点击页面中的任意标签，alert该标签的名称．（注意兼容性）
+// <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+// <html xmlns="http://www.w3.org/1999/xhtml">
+// <head>
+// <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+// <title>鼠标点击页面中的任意标签，alert该标签的名称</title>
+// <style>
+// div{ background:#0000FF;width:100px;height:100px;}
+// span{ background:#00FF00;width:100px;height:100px;}
+// p{ background:#FF0000;width:100px;height:100px;}
+// </style>
+// <script type="text/javascript">
+// document.onclick = function(evt){
+// var e = window.event || evt;
+// var tag = e["target"] || e["srcElement"];
+// alert(tag.tagName);
+// };
+// </script>
+// </head>
+// <body>
+// <div id="div"><span>SPAN</span>DIV</div>
+// <span>SPAN</span>
+// <p>P</p>
+// </body>
+// </html>
