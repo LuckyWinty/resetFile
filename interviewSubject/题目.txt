@@ -62,3 +62,8 @@ split() join() 的区别
 
     超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:
     L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}
+
+
+//9.什么是FOUC？你如何来避免FOUC？
+/*由于css引入使用了@import 或者存在多个style标签以及css文件在页面底部引入使得css文件加载在html之后导致页面闪烁、花屏
+用link加载css文件，放在head标签里面*/
