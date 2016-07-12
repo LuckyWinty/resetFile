@@ -314,33 +314,6 @@ function GetBytes(str){
 function IsString(str){
 	return (typeof str == "string" || str.constructor == String);
 }
-
-/* 请设计一套方案，用于确保页面中JS加载完全。*/
-var n = document.createElement("script");
-n.type = "text/javascript";
-//以上省略部分代码
-//ie支持script的readystatechange属性
-if(ua.ie){
-	n.onreadystatechange = function(){
-		var rs = this.readyState;
-		if('loaded' === rs || 'complete'===rs){
-			n.onreadystatechange = null;
-           f(id,url); //回调函数
-       }
-   };
-//省略部分代码
-//safari 3.x supports the load event for script nodes(DOM2)
-n.addEventListener('load',function(){
-	f(id,url);
-});
-//firefox and opera support onload(but not dom2 in ff) handlers for
-//script nodes. opera, but no ff, support the onload event for link
-//nodes.
-}else{
-	n.onload = function(){
-		f(id,url);
-	};
-}
 //JavaScript中如何对一个对象进行深度clone
 function cloneObject(o) {
 	if(!o || 'object' !== typeof o) {
@@ -387,44 +360,15 @@ function cloneObject(o) {
 // </body>
 // </html>
 
-//请设计一套方案，用于确保页面中JS加载完全。
-var n = document.createElement("script");
-n.type = "text/javascript";
-//以上省略部分代码
-//ie支持script的readystatechange属性
-if(ua.ie){
-	n.onreadystatechange = function(){
-		var rs = this.readyState;
-		if('loaded' === rs || 'complete'===rs){
-			n.onreadystatechange = null;
-           f(id,url); //回调函数
-       }
-   };
-//省略部分代码
-//safari 3.x supports the load event for script nodes(DOM2)
-n.addEventListener('load',function(){
-	f(id,url);
-});
-//firefox and opera support onload(but not dom2 in ff) handlers for
-//script nodes. opera, but no ff, support the onload event for link
-//nodes.
-}else{
-	n.onload = function(){
-		f(id,url);
-	};
-}
+//回文字符串
+function deletNum(str){
+	var arr=str.split('');
+	var maxArr=new Array();
+	var low;
+	var hight;
+	for(var i=0;i<arr.length;i++){
+		low=i;
+		height=arr.length;
 
-/*前端开发的优化问题
-（1） 减少http请求次数：css spirit,data uri
-（2） JS，CSS源码压缩
-（3） 前端模板 JS+数据，减少由于HTML标签导致的带宽浪费，前端用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
-（4） 用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能
-（5） 用setTimeout来避免页面失去响应
-（6） 用hash-table来优化查找
-（7） 当需要设置的样式很多时设置className而不是直接操作style
-（8） 少用全局变量
-（9） 缓存DOM节点查找的结果
-（10） 避免使用CSS Expression
-（11） 图片预载
-（12） 避免在页面的主体布局中使用table，table要等其中的内容完全下载之后才会显示出来，显示比div+css布局慢
-*/
+	}
+}
