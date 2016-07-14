@@ -363,12 +363,25 @@ function cloneObject(o) {
 //回文字符串
 function deletNum(str){
 	var arr=str.split('');
+	var ReArray=str.split('').reverse();
 	var maxArr=new Array();
-	var low;
-	var hight;
+	var temp=new Array();
+	var tempIndex=0;
 	for(var i=0;i<arr.length;i++){
-		low=i;
-		height=arr.length;
-
+		for(var j=tempIndex+1;j<arr.length;j++){
+			if((arr[i]!=ReArray[j])&&(temp.length!=0)){
+				if(maxArr.length<temp.length){
+					maxArr=temp;
+					console.log(maxArr.length);
+				}
+				
+			}else if(arr[i]==ReArray[j]){
+				tempIndex=j;
+				console.log(ReArray[j]);
+				temp.push(arr[j]);
+				break;
+			}
+		}
 	}
+	return maxArr;
 }
