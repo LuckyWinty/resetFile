@@ -368,19 +368,8 @@ function deletNum(str){
 	var temp=new Array();
 	var tempIndex=0;
 	for(var i=0;i<arr.length;i++){
-		for(var j=tempIndex+1;j<arr.length;j++){
-			if((arr[i]!=ReArray[j])&&(temp.length!=0)){
-				if(maxArr.length<temp.length){
-					maxArr=temp;
-					console.log(maxArr.length);
-				}
-				
-			}else if(arr[i]==ReArray[j]){
-				tempIndex=j;
-				console.log(ReArray[j]);
-				temp.push(arr[j]);
-				break;
-			}
+		for(var j=0;j<arr.length;j++){
+			
 		}
 	}
 	return maxArr;
