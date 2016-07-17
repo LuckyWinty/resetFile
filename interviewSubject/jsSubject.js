@@ -361,16 +361,56 @@ function cloneObject(o) {
 // </html>
 
 //回文字符串
-function deletNum(str){
-	var arr=str.split('');
-	var ReArray=str.split('').reverse();
-	var maxArr=new Array();
-	var temp=new Array();
-	var tempIndex=0;
-	for(var i=0;i<arr.length;i++){
-		for(var j=0;j<arr.length;j++){
-			
+/*c++判断
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+int c[1000][1000];
+char str1[1000];
+char str2[1000];
+
+void func(int m,int n){
+	if(m<0||n<0){
+		return;
+	}
+	for(int i=0;i<m;i++){
+		for(int j=0;j<n;j++){
+			c[i][j]=0;
 		}
 	}
-	return maxArr;
+	int count=0;
+    for(int i=0;i<m;i++){
+    	for(int j=0;j<n;j++){
+    		if(str[i]==str[j]){
+    			if(i==0&&j==0){
+    				c[i][j]=1;
+    			}else{
+    				c[i][j]=c[i-1][j-1];
+    			}
+    		}else{
+    			c[i][j]=0;
+    		}
+    	}
+    }
+    for(int i=0;i<m;i++){
+    	for(int j=0;j<n;j++){
+    		if(c[i][j]>count){
+    			count=c[i][j];
+    		}
+    	}
+    }
+    cout<<count<<endl;
+}
+*/
+int main(){
+	char s;
+	while(cin>>s&&s){
+		str1=s;
+		m=strlen(str1);
+		for(int i=m-1;i>=0;i--){
+			str2[i]=str1[i];
+		}
+		func(m,m);
+	}
 }
