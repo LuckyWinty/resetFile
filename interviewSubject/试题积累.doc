@@ -170,3 +170,23 @@ function getUrlParam(sUrl,sKey){
         return result[sKey] || '';
     }
 }
+
+根据包名，在指定空间中创建对象 
+输入描述:
+namespace({a: {test: 1, b: 2}}, 'a.b.c.d')
+
+
+输出描述:
+{a: {test: 1, b: {c: {d: {}}}}}
+function namespace(oNamespace, sPackage) {
+    if(sPackage.length>0){
+        var val=sPackage.substring(0,1);
+        if(!oNamespace[val]){
+            oNamespace[val]={};
+        }
+        arguments.callee(oNamespace[val],sPackage.substring(sPackage.indexOf(val)+2,sPackage.length));
+        return oNamespace;
+    }else{
+        return;
+    }
+}
