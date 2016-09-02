@@ -255,3 +255,60 @@ f2: jQuery.subscribe("done", f2);
 4.promise对象
 f1().then(f2);
 Promises对象是CommonJS工作组提出的一种规范，目的是为异步编程提供 统一接口 ；思想是， 每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数。其优点是回调函数是链式写法，程序的流程非常清晰，而且有一整套的配套方法， 可以实现许多强大的功能，如指定多个回调函数、指定发生错误时的回调函数， 如果一个任务已经完成，再添加回调函数，该回调函数会立即执行，所以不用担心是否错过了某个事件或信号；缺点就是编写和理解相对比较难。
+
+
+写一个求和的函数sum，达到下面的效果
+1
+2
+3
+4
+5
+6
+7
+8
+9
+// Should equal 15
+sum(1, 2, 3, 4, 5);
+// Should equal 0
+sum(5, null, -5);
+// Should equal 10
+sum('1.0', false, 1, true, 1, 'A', 1, 'B', 1, 'C', 1, 'D', 1,
+  'E', 1, 'F', 1, 'G', 1);
+// Should equal 0.3, not 0.30000000000000004
+sum(0.1, 0.2);
+function sum() {
+    var nResult = 0;
+    for (var i = 0, l = arguments.length; i < l; i++) {
+        nResult += window.parseFloat(arguments[i]) || 0;
+    }
+    return nResult.toFixed(3) * 1000 / 1000;
+}
+
+写一个traverse函数，输出所有页面宽度和高度大于50像素的节点。
+
+function traverse(oNode) {
+    var aResult = [];
+    oNode = oNode || document.body;
+    if (oNode.style) {
+        var nWidth = window.parseInt(oNode.style.width, 10) || 0;
+        var nHeight = window.parseInt(oNode.style.height, 10) || 0;
+        if (nWidth > 50 && nHeight > 50) {
+            aResult.push(oNode);
+        }
+    }
+    var aChildNodes = oNode.childNodes;
+    if (aChildNodes.length > 0) {
+        for (var i = 0, l = aChildNodes.length; i < l; i++) {
+            var oTmp = aChildNodes[i];
+            aResult = aResult.concat(traverse(oTmp));
+        }
+    }
+    return aResult;
+}
+
+法二：
+function traverse(){
+    return Array.prototype.filter.call(document.querySelectorAll('body *'), function(node){
+        return node.offsetWidth > 50 && node.offsetHeight > 50;
+    });
+}
