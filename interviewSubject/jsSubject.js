@@ -414,3 +414,42 @@ int main(){
 		func(m,m);
 	}
 }
+/*原生JS判断复选框是否被选中和获取下拉框的值：
+<body>
+    <input type="checkbox" id="checkbox" checked="check"></input>
+    <select id="select">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+    </select>
+*/
+    <script type="text/javascript">
+        console.log(document.getElementById('checkbox').checked);
+        var se=document.getElementById('select');
+        se.addEventListener('change',function(){
+            console.log(se.options[se.selectedIndex].value);
+            console.log(se.options[se.selectedIndex].text);
+        },false);
+    </script>
+
+// /*
+// 原生JS判断单选框是否被选中和获取值：
+// <!--html-->
+// <form id="list" method="post" action="">
+// <input type="radio" name="user" value="1">1
+// <input type="radio" name="user" checked="checked" value="2">2
+// <input type="radio" name="user" value="3">3
+// </form>
+// */
+<script language="javascript">
+function usubmit(action){//获取radio的value的方法
+var radios = document.getElementById("list").user;//获取id为list下的所有name为user的值的集合
+for(var i=0;i<radios.length;i++){//循环值得集合
+if(radios[i].checked){//通过checked属性判断是否被选中
+var userid = radios[i].value//将被选择的radio的值赋给变量userid
+}
+}
+alert(userid)//弹出被选中的radio的值
+}
