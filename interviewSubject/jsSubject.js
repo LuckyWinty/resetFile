@@ -266,6 +266,10 @@ function newArr(){
 	return arr.fill('temp').map(function(item,index,array){
 		return index;
 	})
+	//方法二
+// 	var a = Array(100).join(',').split(',').map(function(item, index) {
+// 　　return index;
+// });
 }
 //随机打乱一个数组的顺序
 function randomArr(arr){
