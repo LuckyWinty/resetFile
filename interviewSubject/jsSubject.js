@@ -117,6 +117,99 @@ for (var n = 1; n < args.length; n++) {
 }
 return temp;
 }
+/*
+@params 各种排序算法
+*/
+//冒泡排序
+function bubble(arr){
+	var len=arr.length;
+	for(var i=len-1;i>=0;i--){
+		for(var j=0;j<i;j++){
+			if(arr[j]>arr[j+1]){
+				var temp=arr[j];
+				arr[j]=arr[j+1];
+				arr[j]=temp;
+			}
+		}
+	}
+	return arr;
+}
+//冒泡优化1，设立标记
+function bubble1(arr){
+	var len=arr.length;
+	var flag=false;
+
+	for(var i=len-1;i>=0;i--){
+		for(var j=0;j<i;j++){
+			if(arr[j]>arr[j+1]){
+				flag=false;
+				var temp=arr[j];
+				arr[j]=arr[j+1];
+				arr[j]=temp;
+			}
+		}
+		if(flag){
+			break;
+		}	
+	}
+	return arr;
+}
+//#优化2：记录某次遍历时最后发生数据交换的位置，这个位置之后的数据显然已经有序了.
+//因此通过记录最后发生数据交换的位置就可以确定下次循环的范围了。
+function bubble2(arr){
+	var len=arr.length;
+	var flag=true;
+	var pos=len-1;
+	var tp=pos;
+
+	for(var i=len-1;i>=0;i--){
+		for(var j=0;j<pos;j++){
+			if(arr[j]>arr[j+1]){
+				flag=false;
+				var temp=arr[j];
+				arr[j]=arr[j+1];
+				arr[j+1]=temp;
+				tp=j+1;
+			}
+		}
+		pos=tp;
+		if(flag){
+			break;
+		}	
+	}
+	return arr;
+}
+//选择排序
+//每次选择最小的往前排
+function selectSort(arr){
+	var len=arr.length;
+	var min=0;
+	for (var i = 0 ; i < len; i++) {
+		min=i;
+		for(j=i+1;j<len;j++){
+			if(arr[i]>arr[j]){
+				min=j;
+			}
+		}
+		var temp=arr[i];
+		arr[i]=arr[min];
+		arr[min]=temp;
+	}
+	return arr;
+}
+//插入排序
+// 插入排序的工作原理是，对于每个未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。
+// 步骤：
+// 1从第一个元素开始，该元素可以认为已经被排序
+// 2取出下一个元素，在已经排序的元素序列中从后向前扫描
+// 3如果被扫描的元素（已排序）大于新元素，将该元素后移一位
+// 4重复步骤3，直到找到已排序的元素小于或者等于新元素的位置
+// 5将新元素插入到该位置后
+// 6重复步骤2~5
+function insertSort(arr){
+	var len=arr.length;
+
+}
 //快速排序
 function quickSort(arr,left,right){
 	if(left<right){
@@ -284,6 +377,16 @@ function randomArr(arr){
 		arr[index]=temp;
 	}
 }
+// 方法二
+// var a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+//     sign = 1; 
+// a.sort(function(a, b) {
+//     //因为Math.random产生的数在0-1之间
+//     //所以0.5两边的概率是相、、的
+//     //大于0.5时为升序，小于0.5时为降序
+//     sign = (Math.random() > 0.5) ? 1 : -1;
+//     return (a - b) * sign;
+// });
 //二分查找
 function halfFind(value,arr){
 	var low=0;
@@ -407,17 +510,17 @@ void func(int m,int n){
     cout<<count<<endl;
 }
 */
-int main(){
-	char s;
-	while(cin>>s&&s){
-		str1=s;
-		m=strlen(str1);
-		for(int i=m-1;i>=0;i--){
-			str2[i]=str1[i];
-		}
-		func(m,m);
-	}
-}
+// int main(){
+// 	char s;
+// 	while(cin>>s&&s){
+// 		str1=s;
+// 		m=strlen(str1);
+// 		for(int i=m-1;i>=0;i--){
+// 			str2[i]=str1[i];
+// 		}
+// 		func(m,m);
+// 	}
+// }
 /*原生JS判断复选框是否被选中和获取下拉框的值：
 <body>
     <input type="checkbox" id="checkbox" checked="check"></input>
@@ -428,17 +531,15 @@ int main(){
         <option>4</option>
         <option>5</option>
     </select>
-*/
-    <script type="text/javascript">
-        console.log(document.getElementById('checkbox').checked);
-        var se=document.getElementById('select');
-        se.addEventListener('change',function(){
-            console.log(se.options[se.selectedIndex].value);
-            console.log(se.options[se.selectedIndex].text);
-        },false);
-    </script>
-
-// /*
+    */
+    // <script type="text/javascript">
+    // console.log(document.getElementById('checkbox').checked);
+    // var se=document.getElementById('select');
+    // se.addEventListener('change',function(){
+    // 	console.log(se.options[se.selectedIndex].value);
+    // 	console.log(se.options[se.selectedIndex].text);
+    // },false);
+    // </script>
 // 原生JS判断单选框是否被选中和获取值：
 // <!--html-->
 // <form id="list" method="post" action="">
@@ -447,13 +548,13 @@ int main(){
 // <input type="radio" name="user" value="3">3
 // </form>
 // */
-<script language="javascript">
-function usubmit(action){//获取radio的value的方法
-var radios = document.getElementById("list").user;//获取id为list下的所有name为user的值的集合
-for(var i=0;i<radios.length;i++){//循环值得集合
-if(radios[i].checked){//通过checked属性判断是否被选中
-var userid = radios[i].value//将被选择的radio的值赋给变量userid
-}
-}
-alert(userid)//弹出被选中的radio的值
-}
+// <script language="javascript">
+// function usubmit(action){//获取radio的value的方法
+// var radios = document.getElementById("list").user;//获取id为list下的所有name为user的值的集合
+// for(var i=0;i<radios.length;i++){//循环值得集合
+// if(radios[i].checked){//通过checked属性判断是否被选中
+// var userid = radios[i].value//将被选择的radio的值赋给变量userid
+// }
+// }
+// alert(userid)//弹出被选中的radio的值
+// }
