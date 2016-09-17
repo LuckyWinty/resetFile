@@ -208,7 +208,22 @@ function selectSort(arr){
 // 6重复步骤2~5
 function insertSort(arr){
 	var len=arr.length;
+	var end=1;
+	var pos=end;
+	var temp;
 
+	while(end!=len){
+		temp=arr[end];
+
+		for(var i=end-1;i>=0 && temp<arr[i];i--){
+			arr[i+1]=arr[i];
+			pos=i;
+		}
+		arr[pos]=temp;
+		end++;
+		pos=end;
+	}
+	return arr;
 }
 //快速排序
 function quickSort(arr,left,right){
