@@ -123,12 +123,12 @@ return temp;
 //冒泡排序
 function bubble(arr){
 	var len=arr.length;
-	for(var i=len-1;i>=0;i--){
+	for(var i=len-1;i>0;i--){
 		for(var j=0;j<i;j++){
 			if(arr[j]>arr[j+1]){
 				var temp=arr[j];
 				arr[j]=arr[j+1];
-				arr[j]=temp;
+				arr[j+1]=temp;
 			}
 		}
 	}
@@ -137,19 +137,21 @@ function bubble(arr){
 //冒泡优化1，设立标记
 function bubble1(arr){
 	var len=arr.length;
-	var flag=false;
+	var flag=true;
 
-	for(var i=len-1;i>=0;i--){
+	for(var i=len-1;i>0;i--){
 		for(var j=0;j<i;j++){
 			if(arr[j]>arr[j+1]){
 				flag=false;
 				var temp=arr[j];
 				arr[j]=arr[j+1];
-				arr[j]=temp;
+				arr[j+1]=temp;
 			}
 		}
 		if(flag){
 			break;
+		}else{
+			flag=true;
 		}	
 	}
 	return arr;
@@ -175,6 +177,8 @@ function bubble2(arr){
 		pos=tp;
 		if(flag){
 			break;
+		}else{
+			flag=true;
 		}	
 	}
 	return arr;
@@ -225,6 +229,21 @@ function insertSort(arr){
 	}
 	return arr;
 }
+//希尔排序
+function shellSort(arr){
+	var len=arr.length;
+
+	for(var gap=len>>1;gap>0;gap>>=1){
+		for(var i=gap;i<len;i++){
+			var temp=arr[i];
+			for(var j=i-gap;j>=0 && arr[j]>temp;j-=gap){
+				arr[j+gap]=arr[j]; 
+			}
+			arr[j+gap]=temp;
+		}
+	}
+	return arr;
+}
 //快速排序
 function quickSort(arr,left,right){
 	if(left<right){
@@ -247,21 +266,7 @@ function quickSort(arr,left,right){
 		arguments.callee(arr,low+1,right);
 	}
 }
-//希尔排序
-function shellSort(){
-	vararr=[49,38,65,97,76,13,27,49,55,04],
-	len=arr.length;
-	for(varfraction=Math.floor(len/2);fraction>0;fraction=Math.floor(fraction/2)){
-		for(vari=fraction;i<len;i++){
-			for(varj=i-fraction;j>=0&&arr[j]>arr[fraction+j];j-=fraction){
-				vartemp=arr[j];
-				arr[j]=arr[fraction+j];
-				arr[fraction+j]=temp;
-			}
-		}
-	}
-	console.log(arr);
-}
+
 //树的遍历
 /*递归*/
 //先序
