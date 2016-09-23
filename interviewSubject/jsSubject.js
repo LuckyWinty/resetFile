@@ -137,21 +137,17 @@ function bubble(arr){
 //冒泡优化1，设立标记
 function bubble1(arr){
 	var len=arr.length;
-	var flag=true;
+	var change=true;
 
-	for(var i=len-1;i>0;i--){
+	for(var i=len-1;i>0&&change;i--){
+		change=false;
 		for(var j=0;j<i;j++){
 			if(arr[j]>arr[j+1]){
-				flag=false;
+				change=true;
 				var temp=arr[j];
 				arr[j]=arr[j+1];
 				arr[j+1]=temp;
 			}
-		}
-		if(flag){
-			break;
-		}else{
-			flag=true;
 		}	
 	}
 	return arr;
@@ -160,14 +156,15 @@ function bubble1(arr){
 //因此通过记录最后发生数据交换的位置就可以确定下次循环的范围了。
 function bubble2(arr){
 	var len=arr.length;
-	var flag=true;
+	var change=true;
 	var pos=len-1;
 	var tp=pos;
 
-	for(var i=len-1;i>=0;i--){
-		for(var j=0;j<pos;j++){
+	for(var i=len-1;i>0&&change;i--){
+		change=false;
+		for(var j=0;j<pos&&flag;j++){
 			if(arr[j]>arr[j+1]){
-				flag=false;
+				change=true;
 				var temp=arr[j];
 				arr[j]=arr[j+1];
 				arr[j+1]=temp;
@@ -175,11 +172,6 @@ function bubble2(arr){
 			}
 		}
 		pos=tp;
-		if(flag){
-			break;
-		}else{
-			flag=true;
-		}	
 	}
 	return arr;
 }
@@ -212,38 +204,67 @@ function selectSort(arr){
 // 6重复步骤2~5
 function insertSort(arr){
 	var len=arr.length;
-	var end=1;
-	var pos=end;
 	var temp;
 
-	while(end!=len){
-		temp=arr[end];
-
-		for(var i=end-1;i>=0 && temp<arr[i];i--){
-			arr[i+1]=arr[i];
-			pos=i;
+	for(var i=1;i<len;i++){
+		temp=arr[i];
+		for(var j=i-1;j>=0&&temp<arr[j];j--){
+			arr[j+1]=arr[j];
 		}
-		arr[pos]=temp;
-		end++;
-		pos=end;
-	}
+		arr[j+1]=temp;
+	}	
 	return arr;
 }
+
 //希尔排序
 function shellSort(arr){
-	var len=arr.length;
+	var len=arr.length,temp;
 
 	for(var gap=len>>1;gap>0;gap>>=1){
 		for(var i=gap;i<len;i++){
-			var temp=arr[i];
-			for(var j=i-gap;j>=0 && arr[j]>temp;j-=gap){
-				arr[j+gap]=arr[j]; 
+			temp=arr[i];
+			for(var j=i-gap;j>=0&&temp<arr[j];j-=gap){
+				arr[j+gap]=arr[j];
 			}
 			arr[j+gap]=temp;
 		}
-	}
+	}	
 	return arr;
 }
+//归并排序
+function mergeSort(arr){
+	var len=arr.length;
+
+	if(len<1){
+		return arr;
+	}
+	var min=len>>1;
+	return merge(arguments.callee(arr.splice(0,min)),arguments.callee(arr.splice(min)));
+
+	function merge(leftArr,rightArr){
+		var res=[];
+		while(leftArr.length&&rightArr.length){
+			res.push(leftArr[0]>rightArr[0]?leftArr.shift():rightArr.shift());
+		}
+		return res.concat(leftArr.concat(rightArr));	
+	}
+}
+// Array.prototype.merge_sort = function () {
+// 	function merge(left, right){
+// 		var final = [];
+// 		while(left.length && right.length){
+// 			final.push(left[0] <= right[0] ? left.shift() : right.shift());
+// 		}
+// 		return final.concat(left.concat(right));
+// 	}
+// 	var len = this.length,
+// 	mid = Math.floor(len / 2);
+// 	if(len < 2){
+// 		return this;
+// 	}
+// 	return merge(this.slice(0, mid).merge_sort(), this.slice(mid).merge_sort());
+// };
+
 //快速排序
 function quickSort(arr,left,right){
 	if(left<right){

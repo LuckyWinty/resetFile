@@ -3,14 +3,29 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style>
+		#test1{
+			display: flex;
+			flex-flow: column;
+			height:500px;
+		}
+		div{
+			border:solid 1px red;
+		}
+         #div1{
+         	height:100px;
+         	border-color: blue;
+         }
+         #div2{
+         	flex:1;
+         	border-color: green;
+         }
+	</style>
 </head>
 <body>
 	<div id="test1">
-		<div class="test"><a href="#" >1</a></div>
-		<div class="test"><a href="#" >2</a></div>
-		<div class="test"><a href="#" >3</a></div>
-		<div class="test">1</div>
-		<div class="test"><a href="#" >5</a></div>
+		<div id="div1"></div>
+		<div id="div2"></div>
 	</div>
 	<script type="text/javascript" src="jsSubject.js"></script>
 	<script>
@@ -41,7 +56,7 @@
 	
 		var arr=[1,2,3,4,5,6,7];
        
-        console.log(bubble([1,3,2,8,5,9,7,4,6]));
+        console.log(shellSort([1,3,2,8,5,9,7,4,6]));
 	</script>
 </body>
 </html>
