@@ -234,59 +234,116 @@ function shellSort(arr){
 //归并排序
 function mergeSort(arr){
 	var len=arr.length;
-
-	if(len<1){
+	if(len<2){
 		return arr;
 	}
-	var min=len>>1;
-	return merge(arguments.callee(arr.splice(0,min)),arguments.callee(arr.splice(min)));
+	var mid=len>>1;
+	return merge(mergeSort(arr.slice(0,mid)),mergeSort(arr.slice(mid)));
 
 	function merge(leftArr,rightArr){
 		var res=[];
 		while(leftArr.length&&rightArr.length){
-			res.push(leftArr[0]>rightArr[0]?leftArr.shift():rightArr.shift());
+			res.push(leftArr[0]<=rightArr[0]?leftArr.shift():rightArr.shift());
 		}
-		return res.concat(leftArr.concat(rightArr));	
+		return res.concat(leftArr.concat(rightArr));
 	}
 }
-// Array.prototype.merge_sort = function () {
-// 	function merge(left, right){
-// 		var final = [];
-// 		while(left.length && right.length){
-// 			final.push(left[0] <= right[0] ? left.shift() : right.shift());
-// 		}
-// 		return final.concat(left.concat(right));
-// 	}
-// 	var len = this.length,
-// 	mid = Math.floor(len / 2);
-// 	if(len < 2){
-// 		return this;
-// 	}
-// 	return merge(this.slice(0, mid).merge_sort(), this.slice(mid).merge_sort());
-// };
 
 //快速排序
-function quickSort(arr,left,right){
-	if(left<right){
-		var key=arr[left];
+function quickSort(arr){
+	var left=0;
+	var right=arr.length-1;
+
+	quick(arr,left,right);
+	return arr;
+	function quick(arr,left,right){
 		var low=left;
 		var high=right;
+		var key=arr[left];
 
-		while(low<high){
-			while(low<high&&arr[high]>key){
-				high--;
+		if(left<right){
+			while(low<high){
+				while(low<high && arr[high]>=key){
+					high--;
+				}
+				if(low<high){
+					arr[low]=arr[high];
+					low++;
+				}
+				while(low<high && arr[low]<=key){
+					low++;
+				}
+				if(low<high){
+					arr[high]=arr[low];
+				}
 			}
-			arr[low]=arr[high];
-			while(low<high&&arr[low]<key){
-				low++;
-			}
-			arr[high]=arr[low];
+			arr[low]=key;
+			quick(arr,left,low-1);
+			quick(arr,low+1,right);
 		}
-		arr[low]=key;
-		arguments.callee(arr,left,low-1);
-		arguments.callee(arr,low+1,right);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function quickSort(arr){
+// 	return quick(arr,0,arr.length-1);
+
+// 	function quick(arr,left,right){
+// 		var key=arr[left];
+// 		var low=left;
+// 		var high=right;
+
+// 		if(left<right){
+// 			while(low<high){
+// 				// 从右往左找，找到一个比 key 小的数	
+// 				while(low<high && arr[high]>=key){
+// 					high--;
+// 				}
+// 				if(low < high){
+// 					arr[low]=arr[high];
+// 					low++;
+// 				}
+// 				// 从左往右找，找到一个比 key 大的数
+// 				while(low<high&& arr[low]<=key){
+// 					low++;
+// 				}
+// 				if(low < high){
+// 					arr[high]=arr[low];
+// 					high--;
+// 				}
+// 			}
+// 			arr[low]=key;
+// 			quick(arr,left,low-1);
+// 			quick(arr,low+1,right);
+// 		}
+// 		return arr;
+// 	}
+// }
 
 //树的遍历
 /*递归*/
@@ -599,3 +656,11 @@ void func(int m,int n){
 // }
 // alert(userid)//弹出被选中的radio的值
 // }
+//Object.keys兼容用法
+(function{
+	Object.keys = Object.keys || function(obj){
+		　　  var a = [];
+		　　  for(a[a.length] in obj);
+			　　  return a ;
+	};
+})()
