@@ -442,6 +442,16 @@ function unique(arr){
 	})
 	return uniqueArr;
 }
+//结合ES6的数组去重方法
+// ES6提供了新的数据结构Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
+
+// Set本身是一个构造函数，用来生成Set数据结构。
+function es6Remove(arr){
+	var s = new Set();
+	arr.map(x => s.add(x));	
+	return s;
+}
+
 //十六进制随机颜色生成
 function color(){
 	var value=["1","2","3","4","5","6","7","8","9","0","a","b","c","d","e","f"];
