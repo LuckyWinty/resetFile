@@ -1,37 +1,37 @@
 试题积累
 将函数 fn 的执行上下文改为 obj 对象 ：
 ①：function speak(fn, obj) {
-  return fn.bind(obj)();
+return fn.bind(obj)();
 }
 ②：function speak(fn, obj) {
-  return fn.apply(obj, obj);
- }
+return fn.apply(obj, obj);
+}
 
 实现函数 makeClosures，调用之后满足如下条件：
 1、返回一个函数数组 result，长度与 arr 相同
 2、运行 result 中第 i 个函数，即 result[i]()，结果与 fn(arr[i]) 相同
 
 法①：function makeClosures(arr, fn) {
-  var result=[];
-   for(var i=0;i<arr.length;i++){
-       result[i]=(function(i){
-           return function(){
-              return fn(arr[i]);   
-           }
-       })(i)
-   }
-    return result;
+var result=[];
+for(var i=0;i<arr.length;i++){
+result[i]=(function(i){
+return function(){
+return fn(arr[i]);   
+}
+})(i)
+}
+return result;
 }
 法②：
 function makeClosures(arr, fn) {
-    var funcs = [];
+var funcs = [];
 arr.forEach(function(item, index){
-        var func = function(){
-            return fn(item);
-        }
-        funcs.push(func);
-    });
-    return funcs;
+var func = function(){
+return fn(item);
+}
+funcs.push(func);
+});
+return funcs;
 }
 输入例子:
 var arr = [1, 2, 3]; var square = function (x) { return x * x; }; var funcs = makeClosures(arr, square); funcs[1]();
@@ -48,22 +48,22 @@ var arr = [1, 2, 3]; var square = function (x) { return x * x; }; var funcs = ma
 5、fn 的参数依次为函数 a, b, c 的调用参数 
 解释： 柯里化是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。简单理解题目意思，就是指，我们将预定义的函数的参数逐一传入到curryIt中，当参数全部传入之后，就执行预定义函数。于是，我们首先要获得预定义函数的参数个数fn.length，然后声明一个空数组去存放这些参数。返回一个匿名函数接收参数并执行，当参数个数小于fn.length，则再次返回该匿名函数，继续接收参数并执行，直至参数个数等于fn.length。最后，调用apply执行预定义函数
 function curryIt(fn) {
-     //获取fn参数的数量
-     var n = fn.length;
-     //声明一个数组args
-     var args = [];
-     //返回一个匿名函数
-     return function(arg){
-         //将curryIt后面括号中的参数放入数组
-         args.push(arg);
-         //如果args中的参数个数小于fn函数的参数个数，
-         //则执行arguments.callee（其作用是引用当前正在执行的函数，这里是返回的当前匿名函数）。
-         //否则，返回fn的调用结果
-         if(args.length < n){
-            return arguments.callee;
-         }else return fn.apply("",args);
-     }
- }
+//获取fn参数的数量
+var n = fn.length;
+//声明一个数组args
+var args = [];
+//返回一个匿名函数
+return function(arg){
+//将curryIt后面括号中的参数放入数组
+args.push(arg);
+//如果args中的参数个数小于fn函数的参数个数，
+//则执行arguments.callee（其作用是引用当前正在执行的函数，这里是返回的当前匿名函数）。
+//否则，返回fn的调用结果
+if(args.length < n){
+return arguments.callee;
+}else return fn.apply("",args);
+}
+}
 
 获取数字 num 二进制形式第 bit 位的值。注意：
 1、bit 从 1 开始
@@ -76,38 +76,38 @@ function curryIt(fn) {
 3
 4
 function valueAtBit(num, bit) {
-  var s = num.toString(2);
-     return s[s.length - bit];
- }
+var s = num.toString(2);
+return s[s.length - bit];
+}
 法②
 function valueAtBit(num, bit) {
-    return (num >> (bit -1)) & 1;
+return (num >> (bit -1)) & 1;
 }
 题目描述
 将给定数字转换成二进制字符串。如果字符串长度不足 8 位，则在前面补 0 到满8位。 
 法①：
 function convertToBinary(num) {
-     //转换为2进制格式
-     var s = num.toString(2);
-     //获得2进制数长度
-     var l = s.length;
-     if(l<8){
-         //声明一个字符串用于补满0
-         var s1 = "0000000";
-         var s2 = s1.slice(0,8-l);
-         s = s2+s; 
-     }
-     return s;
- }
+//转换为2进制格式
+var s = num.toString(2);
+//获得2进制数长度
+var l = s.length;
+if(l<8){
+//声明一个字符串用于补满0
+var s1 = "0000000";
+var s2 = s1.slice(0,8-l);
+s = s2+s; 
+}
+return s;
+}
 法②：
 function convertToBinary(num) {
-    var res = num.toString(2);
-    return res.length > 8 ? res : ('00000000' + res).slice(-8);
+var res = num.toString(2);
+return res.length > 8 ? res : ('00000000' + res).slice(-8);
 }
 给定字符串 str，检查其是否包含连续重复的字母（a-zA-Z），包含返回 true，否则返回 false 
 function containsRepeatingLetter(str) {
-     return /([a-zA-Z])\1/.test(str);
- }
+return /([a-zA-Z])\1/.test(str);
+}
 [问答题|10分]
 题目描述
 [附加题] 请实现下面的自定义事件 Event 对象的接口，功能见注释(测试1)该 Event 对象的接口需要能被其他对象拓展复用(测试2)// 测试1
@@ -145,52 +145,52 @@ emit: function (eventName) {
 };
 答案：
 var Event = {
-    // 通过on接口监听事件eventName
-    // 如果事件eventName被触发，则执行callback回调函数
-    on: function (eventName, callback) {
-        //你的代码
-        if(!this.handles){
-            //this.handles={};
-            Object.defineProperty(this, "handles", {
-                value: {},
-                enumerable: false,
-                configurable: true,
-                writable: true
-            })
-        }
-       
-       if(!this.handles[eventName]){
-            this.handles[eventName]=[];
-       }
-       this.handles[eventName].push(callback);
-    },
-    // 触发事件 eventName
-    emit: function (eventName) {
-        //你的代码
-       if(this.handles[arguments[0]]){
-           for(var i=0;i<this.handles[arguments[0]].length;i++){
-               this.handles[arguments[0]][i](arguments[1]);
-           }
-       }
-    }
+// 通过on接口监听事件eventName
+// 如果事件eventName被触发，则执行callback回调函数
+on: function (eventName, callback) {
+//你的代码
+if(!this.handles){
+//this.handles={};
+Object.defineProperty(this, "handles", {
+value: {},
+enumerable: false,
+configurable: true,
+writable: true
+})
+}
+
+if(!this.handles[eventName]){
+this.handles[eventName]=[];
+}
+this.handles[eventName].push(callback);
+},
+// 触发事件 eventName
+emit: function (eventName) {
+//你的代码
+if(this.handles[arguments[0]]){
+for(var i=0;i<this.handles[arguments[0]].length;i++){
+this.handles[arguments[0]][i](arguments[1]);
+}
+}
+}
 };
 答案2：
 var Event = {
-    on: function (eventName, callback) {
-        if (!this[eventName]) {
-            this[eventName] = [];
-        }
-        this[eventName].push(callback);
-    },
-    emit: function (eventName) {
-        var params = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1) : [];
-        if (this[eventName]) {
-            Array.prototype.forEach.call(this[eventName], function (item) {
-                item.apply(null, params);
-                //关键地方,appaly改变当前的执行环境
-            });
-        }
-    }
+on: function (eventName, callback) {
+if (!this[eventName]) {
+this[eventName] = [];
+}
+this[eventName].push(callback);
+},
+emit: function (eventName) {
+var params = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1) : [];
+if (this[eventName]) {
+Array.prototype.forEach.call(this[eventName], function (item) {
+item.apply(null, params);
+//关键地方,appaly改变当前的执行环境
+});
+}
+}
 }
 
 
@@ -206,20 +206,20 @@ Http中200、302、304、404和500等响应状态码所表示的意义？
 2. 不指定参数名称，返回全部的参数对象 或者 {}
 3. 如果存在多个同名参数，则返回数组 
 function getUrlParam(sUrl,sKey){
-    var result = {};
-    sUrl.replace(/\??(\w+)=(\w+)&?/g,function(a,k,v){
-        if(result[k] !== void 0){
-            var t = result[k];
-            result[k] = [].concat(t,v);
-        }else{
-            result[k] = v;
-        }
-    });
-    if(sKey === void 0){
-        return result;
-    }else{
-        return result[sKey] || '';
-    }
+var result = {};
+sUrl.replace(/\??(\w+)=(\w+)&?/g,function(a,k,v){
+if(result[k] !== void 0){
+var t = result[k];
+result[k] = [].concat(t,v);
+}else{
+result[k] = v;
+}
+});
+if(sKey === void 0){
+return result;
+}else{
+return result[sKey] || '';
+}
 }
 
 根据包名，在指定空间中创建对象 
@@ -230,16 +230,16 @@ namespace({a: {test: 1, b: 2}}, 'a.b.c.d')
 输出描述:
 {a: {test: 1, b: {c: {d: {}}}}}
 function namespace(oNamespace, sPackage) {
-    if(sPackage.length>0){
-        var val=sPackage.substring(0,1);
-        if(!oNamespace[val]){
-            oNamespace[val]={};
-        }
-        arguments.callee(oNamespace[val],sPackage.substring(sPackage.indexOf(val)+2,sPackage.length));
-        return oNamespace;
-    }else{
-        return;
-    }
+if(sPackage.length>0){
+var val=sPackage.substring(0,1);
+if(!oNamespace[val]){
+oNamespace[val]={};
+}
+arguments.callee(oNamespace[val],sPackage.substring(sPackage.indexOf(val)+2,sPackage.length));
+return oNamespace;
+}else{
+return;
+}
 }
 JavaScript异步编程的四种方法
 1.回调函数
@@ -273,44 +273,44 @@ sum(1, 2, 3, 4, 5);
 sum(5, null, -5);
 // Should equal 10
 sum('1.0', false, 1, true, 1, 'A', 1, 'B', 1, 'C', 1, 'D', 1,
-  'E', 1, 'F', 1, 'G', 1);
+'E', 1, 'F', 1, 'G', 1);
 // Should equal 0.3, not 0.30000000000000004
 sum(0.1, 0.2);
 function sum() {
-    var nResult = 0;
-    for (var i = 0, l = arguments.length; i < l; i++) {
-        nResult += window.parseFloat(arguments[i]) || 0;
-    }
-    return nResult.toFixed(3) * 1000 / 1000;
+var nResult = 0;
+for (var i = 0, l = arguments.length; i < l; i++) {
+nResult += window.parseFloat(arguments[i]) || 0;
+}
+return nResult.toFixed(3) * 1000 / 1000;
 }
 
 写一个traverse函数，输出所有页面宽度和高度大于50像素的节点。
 
 function traverse(oNode) {
-    var aResult = [];
-    oNode = oNode || document.body;
-    if (oNode.style) {
-        var nWidth = window.parseInt(oNode.style.width, 10) || 0;
-        var nHeight = window.parseInt(oNode.style.height, 10) || 0;
-        if (nWidth > 50 && nHeight > 50) {
-            aResult.push(oNode);
-        }
-    }
-    var aChildNodes = oNode.childNodes;
-    if (aChildNodes.length > 0) {
-        for (var i = 0, l = aChildNodes.length; i < l; i++) {
-            var oTmp = aChildNodes[i];
-            aResult = aResult.concat(traverse(oTmp));
-        }
-    }
-    return aResult;
+var aResult = [];
+oNode = oNode || document.body;
+if (oNode.style) {
+var nWidth = window.parseInt(oNode.style.width, 10) || 0;
+var nHeight = window.parseInt(oNode.style.height, 10) || 0;
+if (nWidth > 50 && nHeight > 50) {
+aResult.push(oNode);
+}
+}
+var aChildNodes = oNode.childNodes;
+if (aChildNodes.length > 0) {
+for (var i = 0, l = aChildNodes.length; i < l; i++) {
+var oTmp = aChildNodes[i];
+aResult = aResult.concat(traverse(oTmp));
+}
+}
+return aResult;
 }
 
 法二：
 function traverse(){
-    return Array.prototype.filter.call(document.querySelectorAll('body *'), function(node){
-        return node.offsetWidth > 50 && node.offsetHeight > 50;
-    });
+return Array.prototype.filter.call(document.querySelectorAll('body *'), function(node){
+return node.offsetWidth > 50 && node.offsetHeight > 50;
+});
 }
 
 CSS引入的方式有哪些? link和@import的区别是?
@@ -380,3 +380,32 @@ iconfont是一种web字体来代替图片的解决方案： 场景：代替页�
 Kraken (Web)主页： https://kraken.io/
 智图主页： http://zhitu.tencent.com/支持原图png转为jpeg和webp(目前不支持bpg)，并提供各种压缩比压缩，目前在tx内部广泛使用。
 目前bpg格式图片也有部分公司在试用。这方面也可以尝试下。
+
+【算法题】数组中找到两个数，使其和等于某个数
+直接用的最简单的做法——依次求数组两两元素的和，找到结果等于target的两个数，很明显，该算法的时间复杂度为O(n^2)。
+　 　 显然，该解法不是该题最理想的答案，希望能给出时间复杂度更优的解，《编程之美》2.12对该题进行了讲解，给出了不同的时间复杂度的解法。
+O(n*log(n))的解法：先对数组进行排序（时间复杂度为O(n*log(n))），在排序的数组中依次查找target-arr[i]是否在数组中，查找target-arr[i]时可以用二分查找（时间复杂度为O(log(n))），遍历数组一遍知道找到target-arr[i]在数组中为止，所以查找的时间复杂度为O(n*log(n))，总的时间复杂度为O(n*log(n))。
+另一种O(n*log(n))的解法：《编程之美》2.12给出的解法三比较有意思，比1有一些改进，主要改进了查找的过程。首先也是要对数组进行排序（时间复杂度为O(n*log(n))），然后再已排序的数组中，令i=0，j=n-1，判断arr[i]+arr[j]是否等于target，等于则结束，如果小于target，则i=i+1；如果大于target，则j=j-1，这样查找符合条件的两个元素的过程只需要遍历数组一次，因此查找的时间复杂度降低到O(n)，总的时间复杂度还是O(n*log(n))。
+O(n)的解法：将数组中的所有元素存入hash表中，遍历一遍时间复杂度O(n)，然后再遍历一遍数组，查找target-arr[i]是否出现在hash表中，因为在hash表中查找的过程只需O(1)时间，所以第二次遍历的时间复杂度也是O(n)，总的时间复杂度为O(n)。但是该方法也是有弊端的（也是hash表固有的弊端），就是较高的空间复杂度——需要O(n)的hash表存储空间，例如{1，3，6,100000}这样一个数组就需要用100000的空间来存储，存储效率太低太低！另外说明一下，因为这里只需要标记数是否出现过，所以这里用Bitmap数据结构（见：）可以适当的节省空间。hash表是一种用空间换时间的方法，所以该题需要根据实际情况选取合适的方法。
+　 　 另外，http://www.dewen.org/q/6111中一位朋友给出了这样的答案，代码如下：
+[cpp] view plain copy print?
+#include <iostream>  
+#include <map>  
+using namespace std;  
+
+int main()  
+{  
+int a[] = {1,9,5,6,3,4,23,456,32,2,41,23,34}; //数组  
+map<int,int> m;  
+int sum = 10; //给定的整数  
+int count = sizeof(a)/sizeof(int);  
+for(int i=0; i < count; i++) {  
+m.insert(map<int,int>::value_type(sum-a[i], a[i])); //放到hash map中  
+}  
+for(int i=0; i < count; i++) {  
+if(m.find(a[i])->second == sum-a[i]) cout << "find " << i <<endl; //hash值查找  
+}  
+return 0;  
+}  
+
+C++大概的实现就是这样了。  
