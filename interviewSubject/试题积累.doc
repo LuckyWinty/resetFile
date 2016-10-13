@@ -409,3 +409,9 @@ return 0;
 }  
 
 C++大概的实现就是这样了。  
+
+
+//为元素添加class
+var inp=document.getElementById('link');
+inp.className='newAdd';
+inp.setAttribute('class','addAgain'); 
