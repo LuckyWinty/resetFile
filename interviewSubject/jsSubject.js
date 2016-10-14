@@ -674,3 +674,9 @@ void func(int m,int n){
 			　　  return a ;
 	};
 })()
+
+//产生随机数2-10000
+function randomNumber(){
+	var n=Math.floor(Math.random()*5000);
+	return 2*n;
+}
